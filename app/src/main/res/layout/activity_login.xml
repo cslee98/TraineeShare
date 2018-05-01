@@ -1,19 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient">
+
+    <ImageView
+        android:id="@+id/iv_Login"
+        android:layout_width="185dp"
+        android:layout_height="193dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="93dp"
+        android:contentDescription="@string/LoginImageView"
+        app:srcCompat="@drawable/logo" />
+
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="290dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="270dp"
+        android:background="#11000000"
+        android:drawableLeft="@drawable/ic_action_email"
+        android:ems="10"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:textColorHint="#A6A6A6"
+        android:textSize="20sp"
+        android:drawableStart="@drawable/ic_action_email" />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="290dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="203dp"
+        android:background="#11000000"
+        android:drawableLeft="@drawable/ic_action_pass"
+        android:ems="10"
+        android:hint="@string/pass"
+        android:inputType="textPassword"
+        android:textColorHint="#A6A6A6"
+        android:textSize="20sp"
+        android:drawableStart="@drawable/ic_action_pass" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/app_name"/>
-
-    <Button
-        android:id="@+id/btn_Login"
+        android:id="@+id/tv_Register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="63dp"
+        android:text="@string/register_here"
+        android:textColor="#FFF"
+        android:textSize="18sp" />
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.CardView
+        android:pointerIcon="text"
+        android:id="@+id/btn_Login"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="125dp"
+        app:cardBackgroundColor="@color/colorAccent"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="18dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_Login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/login"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>
