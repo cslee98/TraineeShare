@@ -9,23 +9,34 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class SplashActivity extends AppCompatActivity {
 
     Connection_Detector connection_detector;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         connection_detector = new Connection_Detector(this);
+        mAuth = FirebaseAuth.getInstance();
         if(connection_detector.isConnected()==true){
             Toast.makeText(this,"Connected",Toast.LENGTH_SHORT).show();
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    startActivity(new Intent(SplashActivity.this,LoginActivity.class));
-                    finish();
+                    FirebaseUser currentUser = mAuth.getCurrentUser();
+                    if(currentUser == null) {
+                        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                        finish();
+                    }else{
+                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                        finish();
+                    }
                 }
             },3000);
         }else{
