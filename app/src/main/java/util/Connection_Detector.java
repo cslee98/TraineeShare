@@ -1,4 +1,4 @@
-package android.com.traineeshare;
+package util;
 
 import android.app.AlertDialog;
 import android.app.Service;

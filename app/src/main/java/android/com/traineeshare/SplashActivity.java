@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import util.Connection_Detector;
+
 public class SplashActivity extends AppCompatActivity {
 
     Connection_Detector connection_detector;
