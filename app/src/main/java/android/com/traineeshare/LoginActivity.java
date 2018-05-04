@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText et_email, et_pass;
     private Button btn_Login;
+    private TextView registerLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,10 @@ public class LoginActivity extends AppCompatActivity {
         et_email = findViewById(R.id.et_email);
         et_pass = findViewById(R.id.et_password);
         btn_Login = findViewById(R.id.btn_Login);
+        registerLink = findViewById(R.id.tv_Register);
+
         mAuth = FirebaseAuth.getInstance();
+
         mPr = new ProgressDialog(this);
         password_validator = new Password_Validator();
 
@@ -50,10 +55,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
-
-
+    //Login verification function
     public void checkLogin(final String email, final String pass) {
         if (TextUtils.isEmpty(email)) {
             et_email.setError("Email cannot be empty");
@@ -76,8 +82,15 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.d("Login Successful", "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 mPr.dismiss();
+                                finish();
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            } else {
+                            }else if (!mAuth.getCurrentUser().isEmailVerified()){
+                                Log.w("Email unverified","Please verify email. Verification emial have been send");
+                                Toast.makeText(LoginActivity.this,"Please verify email.",Toast.LENGTH_SHORT).show();
+                                mPr.dismiss();
+                                mAuth.getCurrentUser().sendEmailVerification();
+                                et_pass.setText("");
+                            }else {
                                 Log.w("Login Fail", "signInWithEmail:failure", task.getException());
                                 Toast.makeText(LoginActivity.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
